@@ -4,3 +4,4 @@ client/.env
 client/.parcel-cache
 client/dist
 docs
+server
