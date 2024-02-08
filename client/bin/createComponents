@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Set the path to your index.js file
+INDEX_FILE="../src/index.js"
+
+# Get the names of functional components assigned to const variables
+COMPONENTS=$(grep -Eo 'const ([A-Z][a-zA-Z0-9]*) = \(.*\) => {' "$INDEX_FILE" | awk '{print $2}')
+
+# cd ../src/components
+# Loop through the component names and create files
+for COMPONENT in $COMPONENTS; do
+  FILE_NAME="${COMPONENT}.js"
+  touch "../src/components/$FILE_NAME"
+  echo "Created file: $FILE_NAME"
+  # Copy the component code from index.js to the component file
+  sed -n "/const $COMPONENT = (/,/};/p" "$INDEX_FILE" > "../src/components/$FILE_NAME"
+done
