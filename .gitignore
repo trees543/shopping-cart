@@ -3,5 +3,5 @@ server/node_modules
 client/.env
 client/.parcel-cache
 client/dist
-docs
-server
+docs/
+server/
